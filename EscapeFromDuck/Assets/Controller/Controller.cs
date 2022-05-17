@@ -19,8 +19,6 @@ namespace ControllerSpace
             serial.BaudRate = 9600;
             serial.PortName = "COM4";
             connectController();
-            Thread readThread = new Thread(read);
-            readThread.Start();
         }
 
         public static int forward { get { return move; } }
@@ -47,6 +45,8 @@ namespace ControllerSpace
                 serial.Open();
                 write("L4ONN");
                 running = true;
+                Thread readThread = new Thread(read);
+                readThread.Start();
             }
             catch 
             {

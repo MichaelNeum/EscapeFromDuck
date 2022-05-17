@@ -7,6 +7,9 @@ public class KeyboardInputs : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I)) GameController.connectController();
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            GameController.connectController();
+        }
     }
 }
