@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ControllerSpace;
 
 public class ButtonBehaivour : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ButtonBehaivour : MonoBehaviour
 
     public void onClickQuit()
     {
+        GameController.quit();
         Application.Quit();
     }
 }
