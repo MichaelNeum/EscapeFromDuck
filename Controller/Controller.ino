@@ -29,6 +29,7 @@ void writeLed(int led, bool state);
 void sendButtonInfo(int button, bool state);
 void sendJoyStickInfo(bool axis, int value);
 String normalize(int value);
+int eliminateDrift(int input);
 
 void loop() {
   bool * buttonStates = readButtons();
@@ -39,8 +40,8 @@ void loop() {
     }
     buttonStatesBefore[i] = buttonState;
   }
-  x = analogRead(xPin);
-  y = analogRead(yPin);
+  x = eliminateDrift(analogRead(xPin));
+  y = eliminateDrift(analogRead(yPin));
   if(x != xBefore) sendJoyStickInfo(false, x);
   if(y != yBefore) sendJoyStickInfo(true, y);
   xBefore = x;
@@ -99,4 +100,9 @@ String normalize(int value) {
     result += '0';
   }
   return result + String(value);
+}
+
+int eliminateDrift(int input) {
+  if(502 <= input && input <= 522) return 512;
+  return input;
 }
