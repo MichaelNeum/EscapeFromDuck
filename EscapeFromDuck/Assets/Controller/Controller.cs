@@ -23,7 +23,7 @@ namespace ControllerSpace
             readThread.Start();
         }
 
-        public static Led Led;
+        public static Led led;
 
         public static int forward { get { return move; } }
         public static int xAxis { get { return x; } }
@@ -33,8 +33,12 @@ namespace ControllerSpace
         {
             while(running)
             {
-                input = serial.ReadLine();
-                handleInput(input);
+                try
+                {
+                    input = serial.ReadLine();
+                    handleInput(input);
+                }
+                catch { }
             }
         }
 
@@ -44,8 +48,12 @@ namespace ControllerSpace
             {
                 serial.Open();
                 write("L4ONN");
+                running = true;
             }
-            catch { }
+            catch 
+            {
+                running = false;
+            }
         }
 
         public static void quit()
