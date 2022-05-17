@@ -23,8 +23,6 @@ namespace ControllerSpace
             readThread.Start();
         }
 
-        public static Led led;
-
         public static int forward { get { return move; } }
         public static int xAxis { get { return x; } }
         public static int yAxis { get { return y; } }
