@@ -10,6 +10,7 @@ namespace ControllerSpace
     {
         private static SerialPort serial = new SerialPort();
         private static int move = 0;
+        private static bool interact = false;
         private static int x = 0;
         private static int y = 0;
         private static bool running = true;
@@ -24,6 +25,8 @@ namespace ControllerSpace
         public static int forward { get { return move; } }
         public static int xAxis { get { return x; } }
         public static int yAxis { get { return y; } }
+
+        public static bool interaction { get { return interact; } }
 
         public static void read()
         {
@@ -111,6 +114,7 @@ namespace ControllerSpace
                     move = input[4] == 'N' ? 1 : 0;
                     break;
                 case '1':
+                    interact = input[4] == 'N';
                     break;
                 case '2':
                     move = input[4] == 'N' ? -1 : 0;
