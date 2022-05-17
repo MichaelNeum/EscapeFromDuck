@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ControllerSpace;
 
 public class ObjectInteraction : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class ObjectInteraction : MonoBehaviour
                 if (hit.collider.gameObject.layer == CollectableLayer)
                 {
                     Destroy(hit.collider.gameObject);
+                    GameController.turnOnLed(CollectableCount);
                     CollectableCount++;
                     UpdateProgress();
                 }

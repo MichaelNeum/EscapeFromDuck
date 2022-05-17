@@ -61,6 +61,19 @@ namespace ControllerSpace
             serial.Close();
         }
 
+        public static void turnOnLed(int num)
+        {
+            write("L" + num + "ONN");
+        }
+
+        public static void turnOffAllLed()
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                write("L" + i + "OFF");
+            }
+        }
+
         protected static void write(string message)
         {
             serial.WriteLine(message);
