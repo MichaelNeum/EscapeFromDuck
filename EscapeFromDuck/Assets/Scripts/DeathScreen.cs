@@ -20,11 +20,15 @@ public class DeathScreen : MonoBehaviour
             quitButton.SetActive(true);
             retryButton.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+
+            AudioListener.pause = true;
         }
         else
         {
             quitButton.SetActive(false);
             retryButton.SetActive(false);
+
+            AudioListener.pause = false;
         }
     }
 }
