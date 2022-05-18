@@ -4,6 +4,9 @@ const int buttonPins[] = {2, 3, 4};
 const int xPin = A0;
 const int yPin = A1;
 
+const int driftCompArea = 1;
+const int yDriftComp = -10;
+
 int x = 0, xBefore = 0;
 int y = 0, yBefore = 0;
 
@@ -43,7 +46,7 @@ void loop() {
   x = eliminateDrift(analogRead(xPin));
   y = eliminateDrift(analogRead(yPin));
   if(x != xBefore) sendJoyStickInfo(false, x);
-  if(y != yBefore) sendJoyStickInfo(true, y);
+  if(y != yBefore) sendJoyStickInfo(true, y + yDriftComp);
   xBefore = x;
   yBefore = y;
 }
@@ -103,6 +106,7 @@ String normalize(int value) {
 }
 
 int eliminateDrift(int input) {
-  if(502 <= input && input <= 522) return 512;
+  
+  if(512 - driftCompArea <= input && input <= 512 + driftCompArea) return 512;
   return input;
 }
