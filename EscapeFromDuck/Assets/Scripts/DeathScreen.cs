@@ -15,16 +15,16 @@ public class DeathScreen : MonoBehaviour
 
     void Update()
     {
-        if(!GlobalData.PlayerData.alive)
+        bool isDead = !GlobalData.PlayerData.alive;
+
+        quitButton.SetActive(isDead);
+        retryButton.SetActive(isDead);
+
+        AudioListener.pause = isDead;
+
+        if (isDead)
         {
-            quitButton.SetActive(true);
-            retryButton.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            quitButton.SetActive(false);
-            retryButton.SetActive(false);
         }
     }
 }
