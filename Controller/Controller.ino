@@ -1,16 +1,20 @@
 const int statusLedPins[] = {8, 9, 10, 11};
 const int connectionLedPin = 12;
-const int buttonPins[] = {2, 3, 4};
+const int buttonPins[] = {2, 3, 4, 5, 6};
 const int xPin = A0;
 const int yPin = A1;
 
 const int driftCompArea = 1;
 const int yDriftComp = -10;
 
-int x = 0, xBefore = 0;
-int y = 0, yBefore = 0;
+const int numButtons = 5;
 
-bool buttonStatesBefore[] = {false, false, false};
+int x = 0;
+int xBefore = 0;
+int y = 0;
+int yBefore = 0;
+
+bool buttonStatesBefore[] = {false, false, false, false, false};
 
 String inputString = "";
 
@@ -20,7 +24,7 @@ void setup() {
     pinMode(statusLedPins[i], OUTPUT);
   }
   pinMode(connectionLedPin, OUTPUT);
-  for(int i = 0; i < 3; i++) {
+  for(int i = 0; i < numButtons; i++) {
     pinMode(buttonPins[i], INPUT_PULLUP);
   }
 }
@@ -36,7 +40,7 @@ int eliminateDrift(int input);
 
 void loop() {
   bool * buttonStates = readButtons();
-  for(int i = 0; i < 3; i++) {
+  for(int i = 0; i < numButtons; i++) {
     bool buttonState = *(i + buttonStates);
     if(buttonState != buttonStatesBefore[i]) {
       sendButtonInfo(i, buttonState);
@@ -45,8 +49,12 @@ void loop() {
   }
   x = eliminateDrift(analogRead(xPin));
   y = eliminateDrift(analogRead(yPin));
-  if(x != xBefore) sendJoyStickInfo(false, x);
-  if(y != yBefore) sendJoyStickInfo(true, y + yDriftComp);
+  if(x != xBefore) {
+    sendJoyStickInfo(false, x);
+  }
+  if(y != yBefore){
+    sendJoyStickInfo(true, y + yDriftComp);
+  }
   xBefore = x;
   yBefore = y;
 }
@@ -56,8 +64,8 @@ bool myblink() {
 }
 
 bool * readButtons() {
-  static bool states[3];
-  for(int i = 0; i < 3; i++) {
+  static bool states[numButtons];
+  for(int i = 0; i < numButtons; i++) {
     states[i] = !digitalRead(buttonPins[i]);
   }
   return states;
@@ -106,7 +114,6 @@ String normalize(int value) {
 }
 
 int eliminateDrift(int input) {
-  
   if(512 - driftCompArea <= input && input <= 512 + driftCompArea) return 512;
   return input;
 }
