@@ -18,7 +18,16 @@ public class FollowPlayer : MonoBehaviour
         Vector3 duckPosition = duck.transform.position;
 
         Vector3 direction = playerPosition - duckPosition;
-        duck.transform.position += direction.normalized * speed * Time.deltaTime;
+        Vector3 movement = direction.normalized;
+        float singleStep = speed * Time.deltaTime;
+        duck.transform.position += movement * singleStep;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        //90 degree offset due to the duck model
+        targetRotation *= Quaternion.Euler(0, 90, 0);
+        //rotation
+        duck.transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 90 * Time.deltaTime);
+        
 
         float distance = direction.magnitude;
         if(distance < 2.0)
