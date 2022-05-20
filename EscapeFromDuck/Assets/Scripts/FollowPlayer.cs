@@ -33,7 +33,7 @@ public class FollowPlayer : MonoBehaviour
         float singleStep = speed * Time.deltaTime;
         duck.transform.position += movement * singleStep;
 
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        Quaternion targetRotation = Quaternion.LookRotation(movement);
         //90 degree offset due to the duck model
         targetRotation *= Quaternion.Euler(0, 90, 0);
         //rotation
