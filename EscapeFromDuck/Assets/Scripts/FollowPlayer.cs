@@ -6,6 +6,7 @@ public class FollowPlayer : MonoBehaviour
 {
     GameObject duck;
     public float speed;
+
     void Start()
     {
         duck = GameObject.FindGameObjectWithTag("Duck");
@@ -19,6 +20,10 @@ public class FollowPlayer : MonoBehaviour
 
         Vector3 direction = playerPosition - duckPosition;
         Vector3 movement = direction.normalized;
+
+        // Zero out vertical movement to prevent duck from floating if player jumps
+        movement.y = 0;
+
         float singleStep = speed * Time.deltaTime;
         duck.transform.position += movement * singleStep;
 

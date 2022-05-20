@@ -49457,6 +49457,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1534373485}
   speed: 12
+  gravity: -9.81
+  jumpHeight: 4
 --- !u!143 &1534373485
 CharacterController:
   m_ObjectHideFlags: 0
@@ -49513,7 +49515,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b1c4f078c955ddc4da28aae59880452f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.38
   m_Pitch: 1
   Loop: 1
   Mute: 0
