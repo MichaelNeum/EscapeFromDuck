@@ -125,6 +125,7 @@ public class FollowPlayer : MonoBehaviour
 
         // Rotate the duck in the direction of movement
         Quaternion targetRotation = Quaternion.LookRotation(movement);
+
         // 90 degree offset due to the duck model
         targetRotation *= Quaternion.Euler(0, 90, 0);
         duck.transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 90 * Time.deltaTime);

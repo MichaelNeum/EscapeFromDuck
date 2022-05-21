@@ -23,7 +23,7 @@ namespace ControllerSpace
             connectController();
         }
 
-        public static bool flashlight { get { return flashlightOn; } }
+        public static bool flashlight { get { return flashlightOn; } set { flashlightOn = value; } }
         public static int forward { get { return move; } }
         public static int xAxis { get { return x; } }
         public static int yAxis { get { return y; } }
@@ -61,9 +61,13 @@ namespace ControllerSpace
 
         public static void quit()
         {
-            running = false;
-            write("L4OFF");
-            serial.Close();
+            try
+            {
+                running = false;
+                write("L4OFF");
+                serial.Close();
+            }
+            catch { }
         }
 
         public static void turnOnLed(int num)
@@ -73,7 +77,7 @@ namespace ControllerSpace
 
         public static void turnOffAllLed()
         {
-            for(int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 write("L" + i + "OFF");
             }
@@ -81,7 +85,12 @@ namespace ControllerSpace
 
         protected static void write(string message)
         {
-            serial.WriteLine(message);
+            try
+            {
+                serial.WriteLine(message);
+            }
+            catch { }
+            
         }
         
 

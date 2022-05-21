@@ -19,6 +19,7 @@ public class Flashlight : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F))
         {
             light.enabled = !light.enabled;
+            GameController.flashlight = light.enabled;
         }
         light.enabled = GameController.flashlight;
         if(Input.GetKeyDown(KeyCode.P))
