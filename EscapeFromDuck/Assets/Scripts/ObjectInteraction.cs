@@ -6,8 +6,9 @@ using ControllerSpace;
 
 public class ObjectInteraction : MonoBehaviour
 {
+    public int CollectableCount = 0;
+    
     private const int CollectableLayer = 9;
-    private int CollectableCount = 0;
     private int MaxCollectable;
     public Text Progress;
 
@@ -16,6 +17,7 @@ public class ObjectInteraction : MonoBehaviour
         MaxCollectable = GlobalData.CollectableSpawn.numObjects;
         UpdateProgress();
     }
+
     // Update is called once per frame
     void Update()
     {
