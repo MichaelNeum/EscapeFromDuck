@@ -38,6 +38,7 @@ public class Movement : MonoBehaviour
 
         // Increase gravity when falling down to make jump less "floaty"
         verticalVelocity += 3 * gravity * Time.deltaTime;
+        Debug.Log(verticalVelocity);
 
         Vector3 move = transform.right * x + transform.forward * moveForward;
 
