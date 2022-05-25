@@ -31,13 +31,13 @@ public class Movement : MonoBehaviour
 
         float moveForward = Mathf.Abs((GameController.forward + z)) > 1 ? z : (GameController.forward + z);
 
+        // Increase gravity when falling down to make jump less "floaty"
+        verticalVelocity += 3 * gravity * Time.deltaTime;
+        if (controller.isGrounded) verticalVelocity = 0;
         if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-
-        // Increase gravity when falling down to make jump less "floaty"
-        verticalVelocity += 3 * gravity * Time.deltaTime;
         Debug.Log(verticalVelocity);
 
         Vector3 move = transform.right * x + transform.forward * moveForward;
