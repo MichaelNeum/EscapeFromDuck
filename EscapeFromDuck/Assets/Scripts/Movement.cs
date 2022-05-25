@@ -34,9 +34,10 @@ public class Movement : MonoBehaviour
         verticalVelocity += 3 * gravity * Time.deltaTime;
         if (controller.isGrounded) verticalVelocity = 0;
 
-        if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
+        if ((Input.GetKeyDown(KeyCode.Space) || GameController.jump) && controller.isGrounded)
         {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            GameController.jump = false;
         }
 
         Vector3 move = transform.right * x + transform.forward * moveForward;
