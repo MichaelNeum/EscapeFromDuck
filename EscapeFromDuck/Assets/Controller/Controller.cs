@@ -16,6 +16,7 @@ namespace ControllerSpace
         private static bool running = true;
         private static string input = "";
         private static bool flashlightOn = false;
+        private static bool jumped = false;
         static GameController()
         {
             serial.BaudRate = 9600;
@@ -24,6 +25,7 @@ namespace ControllerSpace
         }
 
         public static bool flashlight { get { return flashlightOn; } set { flashlightOn = value; } }
+        public static bool jump { get { return jumped; } set { jumped = value; } }
         public static int forward { get { return move; } }
         public static int xAxis { get { return x; } }
         public static int yAxis { get { return y; } }
@@ -132,6 +134,9 @@ namespace ControllerSpace
                     break;
                 case '3':
                     if(input[4] == 'N') flashlightOn = !flashlightOn;
+                    break;
+                case '4':
+                    if (input[4] == 'N') jumped = true;
                     break;
             }
         }
