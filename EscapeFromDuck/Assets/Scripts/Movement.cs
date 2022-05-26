@@ -17,6 +17,7 @@ public class Movement : MonoBehaviour
     //variables for footsteps
     AudioSource audioSrc;
     Vector3 lastPosition;
+    bool isMoving = false;
 
     void Start()
     {
@@ -30,15 +31,13 @@ public class Movement : MonoBehaviour
 
         float moveForward = Mathf.Abs((GameController.forward + z)) > 1 ? z : (GameController.forward + z);
 
-        // Increase gravity when falling down to make jump less "floaty"
-        verticalVelocity += 3 * gravity * Time.deltaTime;
-        if (controller.isGrounded) verticalVelocity = 0;
-
-        if ((Input.GetKeyDown(KeyCode.Space) || GameController.jump) && controller.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            GameController.jump = false;
         }
+
+        // Increase gravity when falling down to make jump less "floaty"
+        verticalVelocity += 3 * gravity * Time.deltaTime;
 
         Vector3 move = transform.right * x + transform.forward * moveForward;
 
@@ -50,9 +49,15 @@ public class Movement : MonoBehaviour
 
         //footsteps
         Vector3 velocity = (transform.position - lastPosition) / Time.deltaTime;
-        
-
         if ((velocity.x != 0) || (velocity.z != 0))
+        {
+            isMoving = true;
+        } else
+        {
+            isMoving = false;
+        }
+
+        if (isMoving)
         {
             if (!audioSrc.isPlaying)
             {
