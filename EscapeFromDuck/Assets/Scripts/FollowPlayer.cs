@@ -14,7 +14,7 @@ public class FollowPlayer : MonoBehaviour
     public float maxIdleTime = 60 * 5;
     private Vector3 currentDirection;
     private float lastDirectionChange = 0;
-    public float directionChangeInterval = 10;
+    public float directionChangeInterval;
 
     private Vector3 debugPlayerVector;
 
@@ -114,7 +114,7 @@ public class FollowPlayer : MonoBehaviour
         Vector3 movement = GetMovementVector(player);
 
         float maxSpeed = cMovement.speed;
-        float baseSpeed = maxSpeed * (2 / 3);
+        float baseSpeed = maxSpeed * (2.0f / 3.0f);
         float speedScale = cObjects.CollectableCount / GlobalData.CollectableSpawn.numObjects;
 
         float scaledSpeed = baseSpeed + ((baseSpeed - maxSpeed) * speedScale);
