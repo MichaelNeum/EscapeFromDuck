@@ -114,7 +114,7 @@ public class FollowPlayer : MonoBehaviour
         Vector3 movement = GetMovementVector(player);
 
         float maxSpeed = cMovement.speed;
-        float baseSpeed = maxSpeed/ 2;
+        float baseSpeed = maxSpeed * (2 / 3);
         float speedScale = cObjects.CollectableCount / GlobalData.CollectableSpawn.numObjects;
 
         float scaledSpeed = baseSpeed + ((baseSpeed - maxSpeed) * speedScale);
