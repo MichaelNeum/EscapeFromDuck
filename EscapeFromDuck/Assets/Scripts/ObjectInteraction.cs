@@ -12,6 +12,12 @@ public class ObjectInteraction : MonoBehaviour
     private int MaxCollectable;
     public Text Progress;
 
+    public AudioSource source;
+    public AudioClip firstclip;
+    public AudioClip secondclip;
+    public float volume = 0.01f;
+    private bool hasPlayed = false;
+
     void Start()
     {
         MaxCollectable = GlobalData.CollectableSpawn.numObjects;
@@ -32,6 +38,9 @@ public class ObjectInteraction : MonoBehaviour
                     Destroy(hit.collider.gameObject);
                     GameController.turnOnLed(CollectableCount);
                     CollectableCount++;
+                    source.PlayOneShot(secondclip, 0.1f);
+                    source.PlayOneShot(firstclip, 0.05f);
+
                     UpdateProgress();
                 }
             }

@@ -135,6 +135,7 @@ public class FollowPlayer : MonoBehaviour
         if (distance < killDistance)
         {
             GlobalData.PlayerData.alive = false;
+            source.PlayOneShot(clip, volume);
         }
 
         HandleJumpScare(distance);

@@ -6,7 +6,7 @@ public class DeathScreen : MonoBehaviour
 {
     public GameObject quitButton;
     public GameObject retryButton;
-
+     
     void Start()
     {
         quitButton.SetActive(false);
