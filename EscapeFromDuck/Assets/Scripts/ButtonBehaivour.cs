@@ -7,7 +7,7 @@ public class ButtonBehaivour : MonoBehaviour
 {
     public void onClickRetry()
     {
-        Application.LoadLevel(0);
+        Application.LoadLevel(Application.loadedLevel);
         GameController.turnOffAllLed();
     }
 
