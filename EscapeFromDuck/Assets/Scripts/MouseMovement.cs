@@ -23,7 +23,7 @@ public class MouseMovement : MonoBehaviour
 
         yRotation -= yAxis - GameController.yAxis / controllerSensitivity;
         yRotation = Mathf.Clamp(yRotation, -90, 90);
-        if (GlobalData.PlayerData.alive)
+        if (GlobalData.PlayerData.alive && !GlobalData.PlayerData.won)
         {
             transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
             Player.Rotate(Vector3.up * (xAxis - GameController.xAxis / controllerSensitivity));

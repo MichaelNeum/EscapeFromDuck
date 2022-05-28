@@ -38,6 +38,7 @@ public class ObjectInteraction : MonoBehaviour
                     Destroy(hit.collider.gameObject);
                     GameController.turnOnLed(CollectableCount);
                     CollectableCount++;
+                    if (CollectableCount == GlobalData.CollectableSpawn.numObjects) GlobalData.PlayerData.won = true;
                     source.PlayOneShot(secondclip, 0.1f);
                     source.PlayOneShot(firstclip, 0.05f);
 

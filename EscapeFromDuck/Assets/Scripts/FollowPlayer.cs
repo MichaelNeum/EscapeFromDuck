@@ -118,10 +118,11 @@ public class FollowPlayer : MonoBehaviour
         float speedScale = cObjects.CollectableCount / GlobalData.CollectableSpawn.numObjects;
 
         float scaledSpeed = baseSpeed + ((baseSpeed - maxSpeed) * speedScale);
+        Debug.Log(scaledSpeed);
 
         // Move the duck
         float singleStep = scaledSpeed * Time.deltaTime;
-        duck.transform.position += movement * singleStep;
+        duck.transform.position += movement * singleStep * (GlobalData.PlayerData.won ? 0 : 1);
 
         // Rotate the duck in the direction of movement
         Quaternion targetRotation = Quaternion.LookRotation(movement);
