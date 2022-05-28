@@ -40,9 +40,9 @@ public class Movement : MonoBehaviour
             GameController.jump = false;
         }
 
-        Vector3 move = transform.right * x + transform.forward * moveForward;
+        Vector3 move = (transform.right * x + transform.forward * moveForward).normalized;
 
-        if (GlobalData.PlayerData.alive)
+        if (GlobalData.PlayerData.alive && !GlobalData.PlayerData.won)
         {
             controller.Move(move * speed * Time.deltaTime
                 + new Vector3(0, verticalVelocity, 0) * Time.deltaTime);

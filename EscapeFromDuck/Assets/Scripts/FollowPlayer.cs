@@ -120,13 +120,13 @@ public class FollowPlayer : MonoBehaviour
 
         float maxSpeed = cMovement.speed;
         float baseSpeed = maxSpeed * (2.0f / 3.0f);
-        float speedScale = cObjects.CollectableCount / GlobalData.CollectableSpawn.numObjects;
+        float speedScale = (float)cObjects.CollectableCount / (float)GlobalData.CollectableSpawn.numObjects;
 
-        float scaledSpeed = baseSpeed + ((baseSpeed - maxSpeed) * speedScale);
+        float scaledSpeed = baseSpeed + ((maxSpeed - baseSpeed) * speedScale);
 
         // Move the duck
         float singleStep = scaledSpeed * Time.deltaTime;
-        duck.transform.position += movement * singleStep;
+        duck.transform.position += movement * singleStep * (GlobalData.PlayerData.won ? 0.0f : 1.0f);
 
         if (movement != Vector3.zero)
         {
@@ -144,6 +144,7 @@ public class FollowPlayer : MonoBehaviour
         if (distance < killDistance)
         {
             GlobalData.PlayerData.alive = false;
+            source.PlayOneShot(clip, volume);
         }
 
         HandleJumpScare(distance);
