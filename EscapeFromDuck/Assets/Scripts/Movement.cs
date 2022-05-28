@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
             GameController.jump = false;
         }
 
-        Vector3 move = transform.right * x + transform.forward * moveForward;
+        Vector3 move = (transform.right * x + transform.forward * moveForward).normalized;
 
         if (GlobalData.PlayerData.alive)
         {
