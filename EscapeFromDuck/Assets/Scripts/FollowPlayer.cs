@@ -10,7 +10,7 @@ public class FollowPlayer : MonoBehaviour
     public ObjectInteraction cObjects;
 
     public float aggroDistance;
-    public float killDistance = 2.0f;
+    public float killDistance;
     public float maxIdleTime = 60 * 5;
     private Vector3 currentDirection;
     private float lastDirectionChange = 0;
@@ -26,6 +26,11 @@ public class FollowPlayer : MonoBehaviour
 
     void OnDrawGizmos()
     {
+        if (duck == null)
+        {
+            return;
+        }
+
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(duck.transform.position, aggroDistance);
 
@@ -123,14 +128,18 @@ public class FollowPlayer : MonoBehaviour
         float singleStep = scaledSpeed * Time.deltaTime;
         duck.transform.position += movement * singleStep;
 
-        // Rotate the duck in the direction of movement
-        Quaternion targetRotation = Quaternion.LookRotation(movement);
+        if (movement != Vector3.zero)
+        {
+            // Rotate the duck in the direction of movement
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
 
-        // 90 degree offset due to the duck model
-        targetRotation *= Quaternion.Euler(0, 90, 0);
-        duck.transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 90 * Time.deltaTime);
+            // 90 degree offset due to the duck model
+            targetRotation *= Quaternion.Euler(0, 90, 0);
+            duck.transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 90 * Time.deltaTime);
+        }
 
-        float distance = player.magnitude;
+        // Project vector onto horizontal plane to get distance
+        float distance = Vector3.ProjectOnPlane(player, Vector3.up).magnitude;
 
         if (distance < killDistance)
         {
