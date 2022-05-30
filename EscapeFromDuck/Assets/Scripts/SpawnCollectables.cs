@@ -11,13 +11,13 @@ public class SpawnCollectables : MonoBehaviour
     private int items;
     private bool islandTwice;
     private bool cafeeTwice;
-    public bool spawnAllCollectibles;
+    [SerializeField] public bool spawnAllCollectibles;
 
     void Start()
     {
         items = 4;
-        bool islandTwice = false;
-        bool cafeeTwice = false;
+        islandTwice = false;
+        cafeeTwice = false;
         spawnAllCollectibles = false;
 
         possibleSpawns = new Vector3[18];

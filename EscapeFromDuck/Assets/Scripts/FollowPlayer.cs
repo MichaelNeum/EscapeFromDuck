@@ -117,6 +117,7 @@ public class FollowPlayer : MonoBehaviour
     {
         Vector3 player = GetVectorToPlayer();
         Vector3 movement = GetMovementVector(player);
+        Vector3 currentPosition = duck.transform.position;
 
         float maxSpeed = cMovement.speed;
         float baseSpeed = maxSpeed * (2.0f / 3.0f);
@@ -127,7 +128,10 @@ public class FollowPlayer : MonoBehaviour
         // Move the duck
         float singleStep = scaledSpeed * Time.deltaTime;
         duck.transform.position += movement * singleStep * (GlobalData.PlayerData.won ? 0.0f : 1.0f);
-
+        //adjust elevetion changes
+        currentPosition = duck.transform.position;
+        duck.transform.position = new Vector3(currentPosition.x ,Terrain.activeTerrain.SampleHeight(duck.transform.position) + 1.65f, currentPosition.z);
+        
         if (movement != Vector3.zero)
         {
             // Rotate the duck in the direction of movement
