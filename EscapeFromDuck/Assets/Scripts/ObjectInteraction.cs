@@ -50,6 +50,7 @@ public class ObjectInteraction : MonoBehaviour
 
     private void UpdateProgress()
     {
-        Progress.text = CollectableCount + " / " + MaxCollectable;
+        Progress.text = "Collect notes: " + CollectableCount + " / " + MaxCollectable + 
+            "\nDon't get caught by the duck!";
     }
 }
