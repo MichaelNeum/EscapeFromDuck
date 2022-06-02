@@ -11,6 +11,7 @@ public class SpawnCollectables : MonoBehaviour
     private int items;
     private bool islandTwice;
     private bool cafeeTwice;
+    private bool libraryTwice;
     public bool spawnAllCollectibles;
 
     void Start()
@@ -18,9 +19,10 @@ public class SpawnCollectables : MonoBehaviour
         items = 4;
         islandTwice = false;
         cafeeTwice = false;
+        libraryTwice = false;
         spawnAllCollectibles = false;
 
-        possibleSpawns = new Vector3[18];
+        possibleSpawns = new Vector3[20];
         possibleSpawns[0] = new Vector3(-86f, 3f, -18.5f);
         possibleSpawns[1] = new Vector3(-102f, 3f, -100f);
         possibleSpawns[2] = new Vector3(-125f, 3f, -151f);
@@ -43,6 +45,9 @@ public class SpawnCollectables : MonoBehaviour
         possibleSpawns[16] = new Vector3(-35f, 3.75f, -22f);
 
         possibleSpawns[17] = new Vector3(108f, 4.25f, -138f);
+        //next two never together
+        possibleSpawns[18] = new Vector3(-183f, 17.25f, 80f);
+        possibleSpawns[19] = new Vector3(-190f, 7.75f, 5f);
 
         if (spawnAllCollectibles)
         {
@@ -89,7 +94,7 @@ public class SpawnCollectables : MonoBehaviour
 
     private bool checkAlreadyTaken(int check)
     {
-        if (check == 7 || check == 8 || check == 9 || check == 14 || check == 15 || check == 16)
+        if (check == 7 || check == 8 || check == 9 || check == 14 || check == 15 || check == 16 || check == 18 || check == 19)
         {
             if (islandTwice)
             {
@@ -97,12 +102,10 @@ public class SpawnCollectables : MonoBehaviour
                 {
                     return true;
                 }
-            }
-
-            if (check == 7 || check == 8 || check == 9)
-            {
-                islandTwice = true;
-            }
+            } else if (check == 7 || check == 8 || check == 9)
+                {
+                    islandTwice = true;
+                }
 
             if (cafeeTwice)
             {
@@ -110,12 +113,21 @@ public class SpawnCollectables : MonoBehaviour
                 {
                     return true;
                 }
-            }
+            } else if (check == 14 || check == 15 || check == 16)
+                {
+                    cafeeTwice = true;
+                }
 
-            if (check == 14 || check == 15 || check == 16)
+            if (libraryTwice)
             {
-                cafeeTwice = true;
-            }
+                while (check == 18 || check == 19)
+                {
+                    return true;
+                }
+            } else if (check == 18 || check == 19)
+                {
+                    libraryTwice = true;
+                }
         }
 
         foreach (int x in takenSpawns)
