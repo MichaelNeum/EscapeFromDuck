@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ControllerSpace;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -18,13 +19,11 @@ public class PauseMenu : MonoBehaviour
             {
                 Resume();
                 AudioListener.volume = 1;
-
             }
             else
             {
                 Pause();
                 AudioListener.volume = 0;
-
             }
         }
     }
@@ -37,7 +36,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         AudioListener.volume = 1;
-
+        Cursor.visible = false;
     }
 
     void Pause()
@@ -46,6 +45,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void LoadMenu()
@@ -56,6 +56,8 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Quitting game ...");
+        GameController.turnOffAllLed();
+        GameController.quit();
         Application.Quit();
     }
 }

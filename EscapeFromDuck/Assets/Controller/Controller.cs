@@ -92,7 +92,6 @@ namespace ControllerSpace
                 serial.WriteLine(message);
             }
             catch { }
-            
         }
         
 
