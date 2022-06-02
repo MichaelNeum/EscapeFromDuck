@@ -32,6 +32,7 @@ public class DeathScreen : MonoBehaviour
         if (isDead)
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
