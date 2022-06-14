@@ -9,3 +9,12 @@ Duck Game 🦆
 - `/EscapeFromDuck` contains the game itself. [Unity](https://unity.com/) Version 2019.4.13f1 is required.
 
 A [release build](https://github.com/MichaelNeum/EscapeFromDuck/releases/tag/v1.0) is provided.
+
+Controlls:
+Look around: Mouse
+Forward: W
+Backwards: S
+Left: A
+Right: D
+Flashlight: F
+Interact: Left Mouse
