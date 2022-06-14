@@ -10,13 +10,13 @@ Duck Game 🦆
 
 A [release build](https://github.com/MichaelNeum/EscapeFromDuck/releases/tag/v1.0) is provided.
 
-Controlls:
+Controls:
 
 Look around: Mouse
 
 Forward: W
 
-Backwards: S
+Backward: S
 
 Left: A
 
