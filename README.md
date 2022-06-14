@@ -11,10 +11,18 @@ Duck Game 🦆
 A [release build](https://github.com/MichaelNeum/EscapeFromDuck/releases/tag/v1.0) is provided.
 
 Controlls:
+
 Look around: Mouse
+
 Forward: W
+
 Backwards: S
+
 Left: A
+
 Right: D
+
 Flashlight: F
+
 Interact: Left Mouse
+
